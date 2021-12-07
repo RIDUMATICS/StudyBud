@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% if request.path_info == '/auth/register' %}
+    <button type="submit" class="btn btn-default">Register</button>
+    {% elif request.path_info == '/auth/login' %}
+    <button type="submit" class="btn btn-default">Log In</button>
+    {% endif %}
+  </form>
+  {% if request.path_info == '/auth/login' %}
+  <p>haven't signed up yet?</p>
+  <a href="{% url 'register' %}">Sign up</a>
+  {% elif request.path_info == '/auth/register' %}
+  <p>already have an account?</p>
+  <a href="{% url 'login' %}">Log in</a>
+  {% endif %}
+</div>
+
+{% endblock %}
